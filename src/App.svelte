@@ -1,14 +1,15 @@
 <script lang="ts">
-  import Router, {RouteDefinition} from 'svelte-spa-router';
-  import Home from './routes/Home.svelte';
-  import NotFound from './routes/NotFound.svelte';
+    import Router from 'svelte-spa-router';
+    import Home from './routes/Home.svelte';
+    import NotFound from './routes/NotFound.svelte';
+    import {ComponentType} from "svelte";
 
-  const routes: RouteDefinition = {
-    '/': Home,
-    '*': NotFound
-  };
+    const routes: Record<string, ComponentType> = {
+        '/': Home,
+        '*': NotFound
+    };
 </script>
 
 <main class="min-h-screen paper-texture">
-  <Router {routes} />
+    <Router {routes}/>
 </main>
