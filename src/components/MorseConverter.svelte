@@ -9,7 +9,6 @@
 
     $: {
         if (inputText) {
-            console.log('isTextToMorse', $converterStore.isTextToMorse)
             outputText = $converterStore.isTextToMorse
                 ? $converterStore.converter.textToMorse(inputText)
                 : $converterStore.converter.morseToText(inputText);
