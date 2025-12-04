@@ -1,5 +1,4 @@
-<script>
-    import { link } from 'svelte-spa-router';
+<script lang="ts">
     import { onMount } from 'svelte';
 
     let sosVisible = false;
@@ -30,7 +29,6 @@
 
         <a
                 href="/"
-                use:link
                 class="inline-block px-8 py-3 bg-vintage-accent text-vintage-paper rounded
              hover:bg-vintage-ink transition-all duration-300
              transform hover:scale-105 hover:shadow-lg"
