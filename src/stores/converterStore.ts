@@ -4,7 +4,7 @@
  * Following Single Responsibility Principle
  */
 
-import { writable, derived, Writable } from 'svelte/store';
+import { writable, derived } from 'svelte/store';
 import { MorseCodeConverter } from '../lib/morseCodeConverter';
 
 export interface ConverterStoreState {
