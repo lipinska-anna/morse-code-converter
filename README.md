@@ -16,7 +16,6 @@ A vintage-styled Svelte application for converting text to morse code and vice v
 - **Svelte** - Reactive framework
 - **Vite** - Build tool
 - **Tailwind CSS** - Styling
-- **svelte-spa-router** - Client-side routing
 
 ## Installation
 
