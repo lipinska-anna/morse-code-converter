@@ -1,48 +1,36 @@
 <script lang="ts">
-    import { onMount, onDestroy } from 'svelte';
-    import { createTypewriterEffect } from '../lib/typewriterEffect';
-    import { writable } from 'svelte/store';
+    import {createTypewriterEffect} from '../lib/typewriterEffect.svelte';
 
-    export let text = '';
+    let {text = ''}: { text: string } = $props();
 
-    // Usare store per stato reattivo
-    const displayText = writable('');
-    const showCursor = writable(true);
-    let typewriter = null;
-    let cursorInterval;
+    let displayText = $state('');
+    let showCursor = $state(true);
+    let typewriter: TypewriterEffect;
 
-    $: {
-        if (typewriter) {
-            typewriter.type(text);
-        }
-    }
-
-    onMount(() => {
+    $effect(() => {
         typewriter = createTypewriterEffect((newText) => {
-            displayText.set(newText);
+            displayText = newText;
         });
 
-        cursorInterval = setInterval(() => {
-            showCursor.update(v => !v);
+        const interval = setInterval(() => {
+            showCursor = !showCursor;
         }, 530);
+
+        return () => {
+            typewriter?.destroy();
+            clearInterval(interval);
+        };
     });
 
-    onDestroy(() => {
-        if (typewriter) {
-            typewriter.destroy();
-        }
-        if (cursorInterval) {
-            clearInterval(cursorInterval);
-        }
+    $effect(() => {
+        typewriter?.type(text);
     });
 </script>
 
 <div class="relative min-h-[200px] p-4 bg-white border-2 border-vintage-accent rounded">
     <div class="font-typewriter text-lg whitespace-pre-wrap break-words">
-        {$displayText}<span
-            class="inline-block w-0.5 h-6 bg-vintage-ink ml-0.5 align-middle"
-            class:opacity-100={$showCursor}
-            class:opacity-0={!$showCursor}
+        {displayText}
+        <span class="inline-block w-0.5 h-6 bg-vintage-ink ml-0.5 align-middle transition-opacity duration-100 {showCursor ? 'opacity-100' : 'opacity-0'}"
         ></span>
     </div>
 </div>

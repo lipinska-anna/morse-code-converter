@@ -1,7 +1,7 @@
 <script lang="ts">
     import { onMount } from 'svelte';
 
-    let sosVisible = false;
+    let sosVisible = $state(false);
 
     onMount(() => {
         setTimeout(() => sosVisible = true, 300);

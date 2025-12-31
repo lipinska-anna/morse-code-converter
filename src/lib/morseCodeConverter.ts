@@ -24,6 +24,9 @@ const TEXT_MAP: Record<string, string> = Object.fromEntries(
     Object.entries(MORSE_CODE_MAP).map(([key, value]) => [value, key])
 );
 
+// Pre-compiled regex for performance
+const VALID_MORSE_REGEX = /^[.\-\s/]+$/;
+
 export class MorseCodeConverter {
     /**
      * Convert text to morse code
@@ -40,7 +43,7 @@ export class MorseCodeConverter {
                 if (char === ' ') return '/';
                 return MORSE_CODE_MAP[char] || '';
             })
-            // .filter(code => code !== '')
+            .filter(code => code !== '')
             .join(' ');
     }
 
@@ -53,7 +56,7 @@ export class MorseCodeConverter {
         if (!morse) return '';
 
         return morse
-            .split(' / ')
+            .split(/\s\/\s|\s\s\s/)
             .map(word => {
                 return word
                     .split(' ')
@@ -69,17 +72,7 @@ export class MorseCodeConverter {
      * @returns {boolean} Whether the morse code is valid
      */
     isValidMorse(morse: string): boolean {
-        if (!morse) return false;
-
-        const validChars = /^[.\-\s/]+$/;
-        return validChars.test(morse);
+        return morse ? VALID_MORSE_REGEX.test(morse) : false;
     }
 
-    /**
-     * Get all available morse code mappings
-     * @returns {Record<string, string>} Map of characters to morse code
-     */
-    getMorseMap(): Record<string, string> {
-        return { ...MORSE_CODE_MAP };
-    }
 }

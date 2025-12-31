@@ -1,13 +1,16 @@
 <script lang="ts">
-    import { onMount } from 'svelte';
 
-    export let value = '';
-    export const placeholder = 'Type here...';
+    let {
+      value = $bindable(''),
+      placeholder = 'Type here...'
+    } : {
+      value: string,
+      placeholder: string
+    } = $props();
 
-    let textarea;
     let showCursor = true;
 
-    onMount(() => {
+    $effect(() => {
         const cursorInterval = setInterval(() => {
             showCursor = !showCursor;
         }, 530);
@@ -22,11 +25,10 @@
 
 <div class="relative">
   <textarea
-          bind:this={textarea}
-          value={value}
-          on:keyup={handleInput}
-          on:paste={handleInput}
+          bind:value={value}
           {placeholder}
+          oninput={handleInput}
+          onpaste={handleInput}
           rows="8"
           class="w-full p-4 bg-white border-2 border-vintage-accent rounded
            focus:outline-none focus:ring-2 focus:ring-vintage-ink

@@ -6,6 +6,9 @@ const config = {
   preprocess: vitePreprocess({ script: true }),
   kit: {
     adapter: adapter(),
+  },
+  compilerOptions: {
+    runes: true
   }
 };
 
