@@ -1,7 +1,14 @@
 {
   "name": "morse-code-converter",
-  "author": "anrikka",
-  "private": true,
+  "author": {
+    "name": "Anna Lipinska",
+    "url": "https://github.com/lipinska-anna"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lipinska-anna/morse-code-converter"
+  },
+  "private": false,
   "version": "1.0.0",
   "type": "module",
   "scripts": {
@@ -21,5 +28,8 @@
     "ts-node": "^10.9.2",
     "typescript": "^5.0.0",
     "vite": "^6.0.0"
+  },
+  "engines": {
+    "node": "22.x"
   }
 }
